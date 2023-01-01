@@ -1,0 +1,26 @@
+{
+  "name": "react-portfolio-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Randall-code/react-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Randall-code/react-portfolio/issues"
+  },
+  "homepage": "https://github.com/Randall-code/react-portfolio#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  }
+}
