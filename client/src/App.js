@@ -2,11 +2,11 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect, useRef } from "react"
 
+
 function UserData({user}) {
  
   return(
-    <p>{user.name}</p>
-
+      <p>{user.name}</p>
   );
 }
 
@@ -39,12 +39,10 @@ function App() {
       });
   }, [githubUser]);
 
-  console.log(githubUser);
   console.log(githubUserData);
-
-
   return (
     <div className="App">
+      <h3>Enter your Github Username</h3>
       <input
         ref={inputRef}
         type="text"
