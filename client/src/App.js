@@ -1,32 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect, useRef } from "react"
-
-
-function UserData({user}) {
- 
-  return(
-      <p>{user.name}</p>
-  );
-}
-
-
-
+import UserDataForm from "./components/UserDataForm"
+import UserInfo from "./components/UserInfo";
 
 function App() {
 
-  const inputRef = useRef(null);
-
   const [githubUser, setGithubUser] = useState(null);
-  const [githubUserData, setGithubUserData] = useState(null);
+  const [githubUserData, setGithubUserData] = useState({login: "null"});
   
-
-  const handleClick = () => {
-    // 👇 "inputRef.current.value" is input value
-    setGithubUser(inputRef.current.value);
-  }; 
-  
-
   useEffect(() => {
     fetch(`https://api.github.com/users/${githubUser}`)
       .then((res) => {
@@ -39,21 +21,10 @@ function App() {
       });
   }, [githubUser]);
 
-  console.log(githubUserData);
   return (
     <div className="App">
-      <h3>Enter your Github Username</h3>
-      <input
-        ref={inputRef}
-        type="text"
-        id="message"
-        name="message"
-      />
-
-      <button onClick={handleClick}>Update</button>
-        
-      {/* < UserData user={githubUSer} /> */}
-      {githubUserData ? < UserData user={githubUserData} /> : null}
+      < UserDataForm user={githubUser} onSelect={(user) => setGithubUser(user)} />
+      { githubUserData.login != "null" ? < UserInfo user={githubUserData}/> : null }
     </div>
   );
 }
