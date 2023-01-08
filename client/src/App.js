@@ -1,5 +1,3 @@
-import logo from "./logo.svg";
-import "./App.css";
 import { useState, useEffect, useRef } from "react"
 import UserDataForm from "./components/UserDataForm"
 import UserInfo from "./components/UserInfo";
@@ -20,13 +18,17 @@ function App() {
         console.log('error: ' + error);
       });
   }, [githubUser]);
+  console.log(githubUserData);
 
   return (
-    <div className="App">
-      < UserDataForm user={githubUser} onSelect={(user) => setGithubUser(user)} />
-      { githubUserData.login != "null" ? < UserInfo user={githubUserData}/> : null }
+    <div className="h-screen bg-slate-800">
+      <div className="text-slate-400 ">
+        { githubUserData.login != "null" ? < UserInfo user={githubUserData}/> : < UserDataForm user={githubUser} onSelect={(user) => setGithubUser(user)} /> }
+      </div>
     </div>
+
   );
+    
 }
 
 export default App;
