@@ -1,33 +1,32 @@
 import { useState, useEffect, useRef } from "react"
 import UserDataForm from "./components/UserDataForm"
 import UserInfo from "./components/UserInfo";
+import {useFetch} from "./components/useFetch"
 
 function App() {
 
   const [githubUser, setGithubUser] = useState(null);
   const [githubUserData, setGithubUserData] = useState({login: "null"});
+
+  const userData = useFetch(`https://api.github.com/users/${githubUser}`);
   
-  useEffect(() => {
-    fetch(`https://api.github.com/users/${githubUser}`)
-      .then((res) => {
-        if(!res.ok) throw new Error(res.status)
-        else return res.json()
-      })
-      .then(data => setGithubUserData(data))
-      .catch((error) => {
-        console.log('error: ' + error);
-      });
-  }, [githubUser]);
-  console.log(githubUserData);
+  if (userData.loading) return <div><h1>Loading...</h1></div>
+  if (userData.error) return <div><pre>{JSON.stringify(userData.error, null, 2)}</pre></div>
 
-  return (
-    <div className="h-screen bg-slate-800">
-      <div className="text-slate-400 ">
-        { githubUserData.login != "null" ? < UserInfo user={githubUserData}/> : < UserDataForm user={githubUser} onSelect={(user) => setGithubUser(user)} /> }
-      </div>
-    </div>
+  if(userData.data.login !== "null") {
+    return < UserInfo user={userData.data}/>
+  } else{
+    return < UserDataForm user={githubUser} onSelect={(user) => setGithubUser(user)} /> 
+  }
 
-  );
+  // return (
+  //   <div className="h-screen bg-slate-800">
+  //     <div className="text-slate-400 ">
+        
+  //     </div>
+  //   </div>
+
+  // );
     
 }
 
