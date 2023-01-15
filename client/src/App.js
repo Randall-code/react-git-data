@@ -9,6 +9,7 @@ function App() {
   const [githubUserData, setGithubUserData] = useState({login: "null"});
 
   const userData = useFetch(`https://api.github.com/users/${githubUser}`);
+  // const userData = useFetch(`https://api.github.com/users/${githubUser}`);
   
   if (userData.loading) return <div><h1>Loading...</h1></div>
   if (userData.error) return <div><pre>{JSON.stringify(userData.error, null, 2)}</pre></div>
